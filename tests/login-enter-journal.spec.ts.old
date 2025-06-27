@@ -1,0 +1,19 @@
+import { test, expect } from '@playwright/test';
+
+//need to first delete any existing entries for the user
+
+test('Login and enter journal entry', async ({ page }) => {
+  await page.goto('http://localhost:5173/');
+  await page.getByRole('button', { name: 'Sign in with Google' }).click();
+  await page.getByLabel('Email or phone').click();
+  await page.getByLabel('Email or phone').fill('claro.testuser90@gmail.com');
+  await page.getByRole('button', { name: 'Next' }).click();
+  await page.getByLabel('Enter your password').click();
+  await page.getByLabel('Enter your password').fill('SamOtis2023!');
+  await page.getByRole('button', { name: 'Next' }).click();
+  await page.getByRole('textbox').fill('I had a nice weekend. I went over to mum\'s for dinner last night and we had kfc. Not sure having that food just before pickleball is a good idea, maybe next time I\'ll try for something a bit healthier.');
+  await page.getByText('Saved').click();
+  await page.getByRole('button', { name: 'Done writing' }).click();
+  await page.getByText('I had a nice weekend. I went over to mum\'s for dinner last night and we had kfc.').click();
+  await page.getByRole('button', { name: 'Log Out' }).click();
+});

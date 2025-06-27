@@ -1,0 +1,13 @@
+
+const {
+    VITE_API_BASE_URL: API_BASE_URL,
+    VITE_SUPABASE_URL: SUPABASE_URL,
+    VITE_SUPABASE_ANON_KEY: SUPABASE_ANON_KEY,
+  } = import.meta.env;
+  
+  export {
+    API_BASE_URL,
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+  };
+  

@@ -1,0 +1,142 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: #282835;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #282835;
+}
+
+.content-container {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px; /* Optional: Add some horizontal padding to prevent the writingArea sticking to the screen edges on smaller screens */
+  padding-bottom: 200px;
+}
+
+.header {
+  /* Your header styles here */
+  height: 50px;
+  width: 800px;
+  max-width: 100%; /* Prevents the width from exceeding the screen width on smaller screens */
+}
+
+.ProseMirror {
+  width: 800px;
+  max-width: 100%; /* Prevents the width from exceeding the screen width on smaller screens */
+  outline: none;
+  font-family: "Segoe UI", "Outfit", sans-serif;
+  font-size: 27px;
+  color: #f8f8f2;
+  line-height: 1.5;
+  position: relative;
+}
+
+.ProseMirror p {
+  margin-bottom: 20px;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;            /* Footer height */
+}
+
+.footer {
+  /* Your footer styles here */
+  background: grey;
+  height: 100px;
+}
+
+footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 70px;
+}
+
+.saved-message {
+  width:
+}
+
+.footer-inner {
+  width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+xfooter {
+  height: 100px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+}
+
+.editor-placeholder {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  color: #ccc;
+}
+
+.ProseMirror[data-placeholder]::before {
+  color: global.$placeholder-colour;
+  position: absolute;
+  content: attr(data-placeholder);
+  pointer-events: none;
+  font-style: italic;
+}
+
+.placeholder::before {
+  content: attr(data-placeholder);
+  color: #aaa;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 25px;  /* Adjust as needed */
+  color: #aaa;
+  pointer-events: none;
+}
+
+.editor-container {
+  position: relative;
+}
+
+.ProseMirror .placeholder::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 28px;  /* Adjust as needed */
+  color: #aaa;
+  pointer-events: none;
+}
+
+
+.remirror-is-empty:first-of-type::before {
+  position: absolute;
+  color: #aaa;
+  pointer-events: none;
+  height: 0;
+  font-style: italic;
+  content: attr(data-placeholder);
+}

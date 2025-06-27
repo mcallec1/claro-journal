@@ -1,0 +1,107 @@
+jest.mock('src/constants.ts', () => ({
+  API_BASE_URL: 'https://localhost:7112/api',
+}));
+
+import '@testing-library/jest-dom';
+import { render, fireEvent, waitFor } from '@testing-library/react';
+import { Relationships } from './Relationships';
+import { IRelationships } from "api/types";
+import { setupServer } from 'msw/node';
+import { handlers } from 'mocks/handlers';
+import { rest } from 'msw';
+
+
+test('displays CircularProgress and not RelationshipItems or submit button when empty', () => {
+
+  const { queryByTestId, getByRole, queryByRole } = render(<Relationships />);
+
+  // Check for CircularProgress
+  const progress = getByRole('progressbar');
+  expect(progress).toBeInTheDocument();
+
+  // Check that no RelationshipItems are present
+  const relationshipItems = queryByTestId('relationship-item');
+  expect(relationshipItems).not.toBeInTheDocument();
+
+  // Check that no submit button is present
+  const submitButton = queryByRole('button', { name: /save changes/i });
+  expect(submitButton).not.toBeInTheDocument();
+});
+
+const relationships : IRelationships = {
+  journalEntryId: "19fc8a84-188e-4e6f-2881-08dba69a575f",
+  people: [
+      {
+          id: "a1d783ab-1f72-4683-81ef-033f3e20b9e4",
+          name: "Sharon",
+          relationship: 'Friend'
+      },
+       {
+          id: "5947cb57-4bcc-4ec3-b98a-150b3861149b",
+          name: "Mum",
+          relationship: 'Friend'
+      }
+  ]
+};
+
+
+// test for the correct names being shown when there are relationships
+test('displays names and submit button when relationships are present', () => {
+ 
+  const { getByText, getByRole } = render(<Relationships relationships={relationships} />);
+
+  // Check for the names
+  const name1 = getByText('Sharon');
+  const name2 = getByText('Mum');
+  expect(name1).toBeInTheDocument();
+  expect(name2).toBeInTheDocument();
+
+  // Check for the submit button
+  const submitButton = getByRole('button', { name: /save changes/i });
+  expect(submitButton).toBeInTheDocument();
+});
+
+// const handleCallMock = jest.fn();
+
+let capturedBody;
+
+// Convert the handler to a Jest mock function while preserving its original implementation
+const handlerImplementation = async (req, res, ctx) => {
+  capturedBody = await req.json();
+  return res(ctx.json({}));
+};
+
+const handler = jest.fn().mockImplementation(handlerImplementation);
+
+
+const server = setupServer(
+  rest.put('https://localhost:7112/api/relationships/update', handler),
+  ...handlers
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+server.listen({
+  onUnhandledRequest: 'warn' // This will print a warning for unhandled requests
+});
+
+test('submits the correct payload', async () => {
+  const { getByText } = render(<Relationships relationships={relationships} journalEntryId='19fc8a84-188e-4e6f-2881-08dba69a575f' />);
+  
+
+  const saveButton = getByText("Save Changes");
+  fireEvent.click(saveButton);
+  
+  await waitFor(() => {
+    expect(capturedBody).toEqual({
+      people: [
+        { id: "a1d783ab-1f72-4683-81ef-033f3e20b9e4", name: "Sharon", relationship: "Friend" },
+        { id: "5947cb57-4bcc-4ec3-b98a-150b3861149b", name: "Mum", relationship: "Friend" }
+      ],
+      journalEntryId: "19fc8a84-188e-4e6f-2881-08dba69a575f"
+    });
+  });
+});
+

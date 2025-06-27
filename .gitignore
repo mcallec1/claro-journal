@@ -1,0 +1,34 @@
+# dependencies
+# This is the most important line!
+/node_modules
+
+# build output
+# This is where your final production files will go
+/dist
+/build
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
+# Never commit your secrets!
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE / Editor directories
+.vscode/
+.idea/
+
+# Mac / Windows system files
+.DS_Store
+Thumbs.db
+
+# Test reports
+/coverage
+/reports

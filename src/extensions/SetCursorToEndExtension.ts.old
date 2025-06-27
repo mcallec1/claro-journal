@@ -1,0 +1,19 @@
+import { ExtensionPriority, PlainExtension } from '@remirror/core';
+import { Transaction, Dispatch } from 'prosemirror-state';
+
+export class SetCursorToEndExtension extends PlainExtension {
+  get name() {
+    return 'setCursorToEnd' as const;
+  }
+
+  createCommands() {
+    return {
+      setCursorToEnd: () => ({ tr, dispatch }: { tr: Transaction, dispatch: Dispatch }) => {
+        if (dispatch) {
+          // dispatch(tr.setSelection(TextSelection.atEnd(tr.doc)));
+        }
+        return true;
+      },
+    };
+  }
+}

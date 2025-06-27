@@ -1,0 +1,18 @@
+{
+    "testEnvironment": "jsdom",
+    "transform": {
+        "^.+\\.tsx?$": ["ts-jest", {
+            "tsconfig": {
+                "module": "es2020"
+            }
+        }]
+    },
+    "setupFilesAfterEnv": ["<rootDir>/src/setupTests.ts"],
+    "moduleNameMapper": {
+        "^src/(.*)$": "<rootDir>/src/$1",
+        "^components/(.*)$": "<rootDir>/src/components/$1",
+        "^api/(.*)$": "<rootDir>/src/api/$1",
+        "^constants.ts$": "<rootDir>/src/constants.ts",
+        "^mocks/(.*)$": "<rootDir>/src/mocks/$1"
+    }
+}
