@@ -33,6 +33,7 @@ main {
   max-width: 100%; /* Prevents the width from exceeding the screen width on smaller screens */
   font-family: 'Playfair Display', serif;
   font-weight: 700;
+  color: #6a6a6a;
 }
 
 .ProseMirror {
@@ -147,4 +148,16 @@ xfooter {
 .logo-heading {
   font-family: 'Playfair Display', serif;
   font-weight: 700;
+}
+
+.journal-date {
+  color: #6a6a6a;
+}
+
+.footer-inner > div:first-child {
+  color: #6a6a6a;
+}
+
+.secondary-text {
+  color: #6a6a6a;
 }
