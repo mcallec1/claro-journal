@@ -18,13 +18,7 @@ const STORAGE_KEY = 'journal-editor-content';
 const CurrentDate = () => {
   const currentDate = dayjs().format('dddd, MMMM D, YYYY');
   return (
-    <Typography
-      className='journal-date'
-      variant='h4'
-      component='div'
-      fontWeight='bold'
-      mb={4}
-    >
+    <Typography className='journal-date' component='div'>
       {currentDate}
     </Typography>
   );
