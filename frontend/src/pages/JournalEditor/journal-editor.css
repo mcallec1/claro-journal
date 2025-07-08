@@ -22,8 +22,27 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 20px; /* Optional: Add some horizontal padding to prevent the writingArea sticking to the screen edges on smaller screens */
+  padding: 0 20px;
   padding-bottom: 200px;
+  position: relative;
+  padding-top: 60px;
+  /* Remove mask-image from here */
+}
+
+.content-container::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 80px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    #f9f8f6 0%,
+    rgba(249, 248, 246, 0) 100%
+  );
+  z-index: 3;
 }
 
 .header {
@@ -38,13 +57,14 @@ main {
 
 .ProseMirror {
   width: 800px;
-  max-width: 100%; /* Prevents the width from exceeding the screen width on smaller screens */
+  max-width: 100%;
   outline: none;
   font-family: 'Lora', serif;
   font-size: 27px;
   color: #272727;
   line-height: 1.5;
   position: relative;
+  /* Remove mask-image for now */
 }
 
 .ProseMirror p {
@@ -211,13 +231,23 @@ xfooter {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 40px auto 20px auto;
-  max-width: 800px;
-  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 80px;
+  z-index: 10;
+  background: rgba(249, 248, 246, 0.7);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  margin: 0;
+  pointer-events: none;
 }
 
 .logo {
   height: 40px;
   width: auto;
   object-fit: contain;
+  pointer-events: auto;
+  z-index: 11;
 }
