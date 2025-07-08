@@ -15,6 +15,14 @@ import './journal-editor.css';
 
 const STORAGE_KEY = 'journal-editor-content';
 
+const Logo = () => {
+  return (
+    <div className='logo-container'>
+      <img src='/claro-logo.png' alt='Claro' className='logo' />
+    </div>
+  );
+};
+
 const CurrentDate = () => {
   const currentDate = dayjs().format('dddd, MMMM D, YYYY');
   return (
@@ -145,6 +153,7 @@ export const JournalEditor = () => {
         <div style={{ flex: 1 }}>
           <div className='content-container'>
             <div className='header' />
+            <Logo />
             <CurrentDate />
             <Remirror
               manager={manager}

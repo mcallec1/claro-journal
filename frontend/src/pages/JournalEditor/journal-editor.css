@@ -206,3 +206,18 @@ xfooter {
 .secondary-text {
   color: #6a6a6a;
 }
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto 20px auto;
+  max-width: 800px;
+  width: 100%;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
