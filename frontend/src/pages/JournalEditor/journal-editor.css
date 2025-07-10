@@ -92,8 +92,10 @@ footer {
   align-items: flex-end;
   justify-content: center;
   width: 100vw;
-  height: 70px;
-  background: transparent;
+  height: 95px;
+  background: rgba(249, 248, 246, 0.7);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   box-shadow: none;
 }
 
